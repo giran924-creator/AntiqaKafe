@@ -102,7 +102,7 @@ motion and browser console. Local illustration assets work offline; Google Fonts
 
 `images/antiqa-logo.jpg` is the exact official 640×640 JPEG supplied in the
 repository; it is not redrawn, cropped or recolored. Header/footer use that file
-directly with `object-fit: contain` and explicit square dimensions (48px/42px
+directly with a circular CSS mask, `object-fit: cover` and explicit square dimensions (48px/42px
 header, 58px footer). Browser assets are downscaled from the full square source:
 64px PNG and a multi-resolution ICO (16, 32, 48, 64px). The social preview uses
 the full logo at 500×500 on a 1200×630 black canvas, without additional graphics.

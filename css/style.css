@@ -37,7 +37,7 @@ p { color: var(--muted); }
 .site-header.scrolled, .site-header.menu-open { padding-block: 17px; background: #1c1c18ed; border-color: #c8af832b; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
 .brand { display: grid; grid-template-columns: 48px 1fr; align-items: center; column-gap: 13px; font: 23px/1.15 var(--serif); letter-spacing: 2.1px; white-space: nowrap; }
 .brand-mark { grid-row: 1 / 3; color: var(--gold); }
-.brand-mark img { display: block; width: 48px; height: 48px; object-fit: contain; }
+.brand-mark img { display: block; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
 footer .brand { grid-template-columns: 58px 1fr; }
 footer .brand-mark img { width: 58px; height: 58px; }
 .brand small { grid-column: 2; margin-top: 8px; font: 7px var(--sans); letter-spacing: 2px; }
