@@ -66,7 +66,7 @@ document.querySelector('meta[name="description"]').content = CAFE.seoDescription
 document.querySelector('meta[property="og:title"]').content = document.title;
 document.querySelector('meta[property="og:description"]').content = CAFE.ogDescription;
 document.querySelector('meta[property="og:url"]').content = CAFE.website;
-document.querySelector('meta[property="og:image"]').content = new URL('images/atmosphere.svg', CAFE.website).href;
+document.querySelector('meta[property="og:image"]').content = new URL('images/og-cover.jpg', CAFE.website).href;
 document.querySelector('link[rel="canonical"]').href = CAFE.website;
 document.querySelector('#cafe-schema').textContent = JSON.stringify({
   '@context': 'https://schema.org', '@type': 'Restaurant',

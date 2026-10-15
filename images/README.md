@@ -15,3 +15,11 @@ when opening index.html directly. Keep width/height attributes; adjust alt text
 and remove sample-image captions once authentic images are supplied. Optimize
 WebP/AVIF images before uploading. Hero loads eagerly; other photographs load lazily.
 For multiple image sizes you can add srcset and sizes to the HTML images.
+
+## Official logo (not a placeholder)
+
+`antiqa-logo.jpg` is the official, unmodified logo source (640×640). Header and
+footer use it directly without cropping. `favicon-antiqa.png` is a full-image
+64×64 resize; the root `favicon.ico` contains 16/32/48/64px sizes. `og-cover.jpg`
+is a 1200×630 black social canvas with the full logo centered at 500×500.
+These are deterministic resized derivatives; the artwork is not recreated.

@@ -14,7 +14,9 @@ Qoraqalpog‘iston Respublikasi, To‘rtko‘l shahri, To‘rtko‘l Xalq Banki 
 - `js/app.js`: central `CAFE` business settings and `MENU` content; navigation,
   category filters, current year and progressive scroll reveals.
 - `images/README.md`: local photograph names, sizes and replacement instructions.
-- `favicon.svg`: editable brand symbol.
+- `images/antiqa-logo.jpg`: official, unmodified ANTIQA logo source used in header/footer.
+- `favicon.ico`, `images/favicon-antiqa.png`: resized logo derivatives for browser tabs.
+- `images/og-cover.jpg`: 1200×630 logo-centered social preview.
 
 ## Preview
 
@@ -63,8 +65,9 @@ For SEO and visitors without JavaScript, also update initial name/contact text,
 JavaScript synchronizes live metadata with `CAFE`, but social crawlers often read
 only the original HTML. Current canonical/OG URL:
 `https://antiqakafe.giran924.workers.dev/`. Update it in HTML and CAFE when a
-custom domain is connected. The OG image currently uses the local SVG illustration;
-replace it with a real JPG/PNG social image later for wider social-platform support.
+custom domain is connected. The OG image is `images/og-cover.jpg`, a local 1200×630 JPEG using the official
+logo centered on black. HTML and JavaScript point to the same image. Its size,
+type and alternative text are included in the static Open Graph metadata.
 The Restaurant schema includes the confirmed phone, history, cuisine, coordinates,
 social profiles, both map links and the confirmed PostalAddress (region, city,
 bank landmark, country UZ). Keep the existing geo coordinates; do not add opening
@@ -94,3 +97,14 @@ Deployment is not performed by this project.
 Check desktop/mobile widths, keyboard focus, mobile toggle/Escape/link dismissal,
 all menu filters and full-menu reset, anchors, direct `file://` loading, reduced
 motion and browser console. Local illustration assets work offline; Google Fonts gracefully fall back to system fonts.
+
+## Official branding assets
+
+`images/antiqa-logo.jpg` is the exact official 640×640 JPEG supplied in the
+repository; it is not redrawn, cropped or recolored. Header/footer use that file
+directly with `object-fit: contain` and explicit square dimensions (48px/42px
+header, 58px footer). Browser assets are downscaled from the full square source:
+64px PNG and a multi-resolution ICO (16, 32, 48, 64px). The social preview uses
+the full logo at 500×500 on a 1200×630 black canvas, without additional graphics.
+The restrained river accent, static ripple outlines and heritage emphasis are
+CSS details; no additional animation or runtime dependency is introduced.
