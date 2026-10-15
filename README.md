@@ -2,9 +2,10 @@
 
 A responsive Uzbek-language café website. Plain HTML, CSS and vanilla JavaScript;
 no framework, build tools, dependencies or server-side API. ANTIQA specializes
-in fish dishes and has served guests since 2001. Contacts and coordinates are
+in fish dishes and has served guests since 2001. Contacts, written location and coordinates are
 confirmed; menu names/prices and illustrations remain **demonstration content**.
-Opening hours are not yet supplied; no street address is claimed.
+Opening hours are not yet supplied. The confirmed public address is:
+Qoraqalpog‘iston Respublikasi, To‘rtko‘l shahri, To‘rtko‘l Xalq Banki yonida.
 
 ## Structure
 
@@ -37,7 +38,8 @@ The clearly marked configuration at the top of `js/app.js` is the main edit poin
 | Café name | `CAFE.name` |
 | Telephone label | `CAFE.phoneDisplay` |
 | Telephone action | `CAFE.phone`, e.g. `tel:+998901234567` |
-| Location label / coordinates | `CAFE.address`, `CAFE.latitude`, `CAFE.longitude` |
+| Public address / structured address | `CAFE.address`, `CAFE.postalAddress` |
+| Internal geo coordinates | `CAFE.latitude`, `CAFE.longitude` |
 | Opening hours | `CAFE.hours` |
 | Telegram | `CAFE.telegram`, a complete `https://t.me/...` URL |
 | Instagram | `CAFE.instagram`, a complete HTTPS profile URL |
@@ -50,8 +52,9 @@ The clearly marked configuration at the top of `js/app.js` is the main edit poin
 The phone, Telegram, Instagram, Google Maps and Yandex Maps links are real and
 are also written into HTML so they work without JavaScript. HTTPS links open in
 a new tab with `noopener noreferrer`. The map remains a stylized illustration,
-not an embedded map, with real external map links and coordinates
-(41.554582, 61.000446). Keep coordinates and the location label in sync.
+not an embedded map, with real external map links. Visitors see the written
+address in the contact section and footer. Coordinates remain internal in CAFE
+and JSON-LD for local SEO, and are not displayed as public location text.
 
 Long-form section text and navigation labels live directly in `index.html`, grouped
 by named semantic sections. Colors/fonts are in `:root` in `css/style.css`.
@@ -63,8 +66,9 @@ only the original HTML. Current canonical/OG URL:
 custom domain is connected. The OG image currently uses the local SVG illustration;
 replace it with a real JPG/PNG social image later for wider social-platform support.
 The Restaurant schema includes the confirmed phone, history, cuisine, coordinates,
-social profiles and both map links. Do not add a PostalAddress or opening hours
-until confirmed.
+social profiles, both map links and the confirmed PostalAddress (region, city,
+bank landmark, country UZ). Keep the existing geo coordinates; do not add opening
+hours until confirmed.
 
 ## Photographs
 

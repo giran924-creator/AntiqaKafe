@@ -1,13 +1,19 @@
 'use strict';
 
 /* EDIT HERE: real business information; menu dishes/prices remain samples.
-   No written street address or confirmed opening hours have been supplied. */
+   The written location is confirmed; opening hours have not yet been supplied. */
 const CAFE = {
   name: 'ANTIQA',
   shortDescription: 'Antiqa baliq taomlari',
   brandSubtitle: 'BALIQ TAOMLARI',
   footerSubtitle: 'Baliq taomlari · 2001-yildan beri',
-  address: 'Lokatsiya: 41.554582, 61.000446',
+  address: "Qoraqalpog‘iston Respublikasi, To‘rtko‘l shahri, To‘rtko‘l Xalq Banki yonida",
+  postalAddress: {
+    addressRegion: 'Qoraqalpog‘iston Respublikasi',
+    addressLocality: 'To‘rtko‘l shahri',
+    streetAddress: 'To‘rtko‘l Xalq Banki yonida',
+    addressCountry: 'UZ',
+  },
   phoneDisplay: '+998 97 788 08 68',
   phone: 'tel:+998977880868',
   hours: 'Ish vaqti — keyin kiritiladi',
@@ -23,7 +29,6 @@ const CAFE = {
   ogDescription: '2001-yildan beri baliq taomlari va samimiy muhit.',
   since: '2001',
 };
-CAFE.coordinates = `${CAFE.latitude}, ${CAFE.longitude}`;
 
 const MENU = [
   { name: 'Gril tovuq', category: 'main', label: 'ASOSIY TAOM', description: 'Tovuq filesi, mavsumiy sabzavotlar va yengil sous. Namuna.', price: '68 000', image: 'images/menu-1.svg' },
@@ -36,7 +41,16 @@ const MENU = [
 
 // Use textContent for configurable text; no HTML is evaluated from settings.
 document.querySelectorAll('[data-cafe]').forEach(element => {
-  element.textContent = CAFE[element.dataset.cafe] || '';
+  const text = CAFE[element.dataset.cafe] || '';
+  element.textContent = text;
+  if (element.hasAttribute('data-address-lines')) {
+    element.replaceChildren();
+    const lines = text.split(', ');
+    lines.forEach((line, index) => {
+      element.append(document.createTextNode(line + (index < lines.length - 1 ? ',' : '')));
+      if (index < lines.length - 1) element.append(document.createElement('br'));
+    });
+  }
 });
 document.querySelectorAll('[data-link]').forEach(link => {
   const url = CAFE[link.dataset.link];
@@ -60,6 +74,7 @@ document.querySelector('#cafe-schema').textContent = JSON.stringify({
   description: CAFE.description, telephone: CAFE.phone.replace(/^tel:/, ''),
   url: CAFE.website, servesCuisine: ['Fish', 'Seafood', 'Uzbek cuisine'],
   foundingDate: CAFE.since,
+  address: { '@type': 'PostalAddress', ...CAFE.postalAddress },
   geo: { '@type': 'GeoCoordinates', latitude: CAFE.latitude, longitude: CAFE.longitude },
   sameAs: [CAFE.telegram, CAFE.instagram],
   hasMap: [CAFE.googleMaps, CAFE.yandexMaps],
