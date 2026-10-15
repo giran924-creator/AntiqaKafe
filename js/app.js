@@ -1,19 +1,30 @@
 'use strict';
 
-/* EDIT HERE: business information, menu and image URLs. Empty contact URLs
-   intentionally stay as clearly labelled placeholders; never invent details. */
+/* EDIT HERE: real business information; menu dishes/prices remain samples.
+   No written street address or confirmed opening hours have been supplied. */
 const CAFE = {
-  name: 'CAFÉ NAME',
-  address: 'Shahar, ko‘cha, uy raqami — to‘ldiriladi',
-  phoneDisplay: '+998 (XX) XXX-XX-XX',
-  phone: '', // e.g. tel:+998901234567
-  hours: 'Ish vaqti — to‘ldiriladi',
-  telegram: '', // https://t.me/your_username
-  instagram: '', // https://www.instagram.com/your_username/
-  map: '', // https://www.google.com/maps?... (no embed required)
-  website: 'https://example.com/', // replace before publishing
-  description: 'Yaxshi taom, iliq muhit va samimiy suhbatlar uchun makon.',
+  name: 'ANTIQA',
+  shortDescription: 'Antiqa baliq taomlari',
+  brandSubtitle: 'BALIQ TAOMLARI',
+  footerSubtitle: 'Baliq taomlari · 2001-yildan beri',
+  address: 'Lokatsiya: 41.554582, 61.000446',
+  phoneDisplay: '+998 97 788 08 68',
+  phone: 'tel:+998977880868',
+  hours: 'Ish vaqti — keyin kiritiladi',
+  telegram: 'https://t.me/antiqa_turtkul',
+  instagram: 'https://www.instagram.com/antiqaturtkul/',
+  googleMaps: 'https://maps.app.goo.gl/n4H36RkJqtJH1E9J7',
+  yandexMaps: 'https://yandex.uz/maps/-/CXBjmW8u',
+  latitude: 41.554582,
+  longitude: 61.000446,
+  website: 'https://antiqakafe.giran924.workers.dev/',
+  description: 'ANTIQA — asosan baliq mahsulotlaridan tayyorlanadigan taomlarga ixtisoslashgan kafe. 2001-yildan beri xalq xizmatida.',
+  seoDescription: 'ANTIQA — baliq mahsulotlaridan tayyorlanadigan taomlarga ixtisoslashgan kafe. 2001-yildan beri xalq xizmatida. Telefon: +998 97 788 08 68.',
+  ogDescription: '2001-yildan beri baliq taomlari va samimiy muhit.',
+  since: '2001',
 };
+CAFE.coordinates = `${CAFE.latitude}, ${CAFE.longitude}`;
+
 const MENU = [
   { name: 'Gril tovuq', category: 'main', label: 'ASOSIY TAOM', description: 'Tovuq filesi, mavsumiy sabzavotlar va yengil sous. Namuna.', price: '68 000', image: 'images/menu-1.svg' },
   { name: 'Kremli pasta', category: 'main', label: 'ASOSIY TAOM', description: 'Mayin qaymoqli sous va ko‘katlar bilan pasta. Namuna.', price: '54 000', image: 'images/menu-2.svg' },
@@ -29,39 +40,29 @@ document.querySelectorAll('[data-cafe]').forEach(element => {
 });
 document.querySelectorAll('[data-link]').forEach(link => {
   const url = CAFE[link.dataset.link];
-  if (url) {
-    link.href = url;
-    if (url.startsWith('https://')) { link.target = '_blank'; link.rel = 'noopener noreferrer'; }
-  } else {
-    link.href = '#contact';
-    link.title = 'Namuna — haqiqiy aloqa havolasi hali kiritilmagan';
-    link.dataset.placeholder = 'true';
-    link.addEventListener('click', () => {
-      document.querySelector('.contact-notice').textContent = 'Bu aloqa havolasi hali kiritilmagan. Kontakt ma’lumotlari hozircha namuna.';
-    });
+  if (!url) return;
+  link.href = url;
+  if (url.startsWith('https://')) {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
   }
 });
-if (CAFE.map) {
-  const mapLink = document.querySelector('#map-link');
-  mapLink.href = CAFE.map;
-  mapLink.textContent = 'Google Maps’da ochish ↗';
-  mapLink.target = '_blank';
-  mapLink.rel = 'noopener noreferrer';
-  document.querySelector('.map-label p').textContent = CAFE.address;
-}
-if (CAFE.phone && CAFE.telegram && CAFE.instagram) document.querySelector('.contact-notice').hidden = true;
-document.title = `${CAFE.name} — Ta’m va xotirjamlik`;
-document.querySelector('meta[name="description"]').content = `${CAFE.name} — ${CAFE.description}`;
+document.title = `${CAFE.name} — Baliq taomlari`;
+document.querySelector('meta[name="description"]').content = CAFE.seoDescription;
 document.querySelector('meta[property="og:title"]').content = document.title;
-document.querySelector('meta[property="og:description"]').content = CAFE.description;
+document.querySelector('meta[property="og:description"]').content = CAFE.ogDescription;
 document.querySelector('meta[property="og:url"]').content = CAFE.website;
+document.querySelector('meta[property="og:image"]').content = new URL('images/atmosphere.svg', CAFE.website).href;
 document.querySelector('link[rel="canonical"]').href = CAFE.website;
 document.querySelector('#cafe-schema').textContent = JSON.stringify({
-  '@context': 'https://schema.org', '@type': 'CafeOrCoffeeShop',
-  name: CAFE.name, url: CAFE.website, description: CAFE.description,
-  ...(CAFE.phone ? { telephone: CAFE.phone.replace(/^tel:/, '') } : {}),
-  ...(CAFE.address.includes('to‘ldiriladi') ? {} : { address: { '@type': 'PostalAddress', streetAddress: CAFE.address } }),
-  sameAs: [CAFE.instagram, CAFE.telegram].filter(Boolean),
+  '@context': 'https://schema.org', '@type': 'Restaurant',
+  name: CAFE.name, alternateName: CAFE.shortDescription,
+  description: CAFE.description, telephone: CAFE.phone.replace(/^tel:/, ''),
+  url: CAFE.website, servesCuisine: ['Fish', 'Seafood', 'Uzbek cuisine'],
+  foundingDate: CAFE.since,
+  geo: { '@type': 'GeoCoordinates', latitude: CAFE.latitude, longitude: CAFE.longitude },
+  sameAs: [CAFE.telegram, CAFE.instagram],
+  hasMap: [CAFE.googleMaps, CAFE.yandexMaps],
 });
 document.querySelector('#year').textContent = new Date().getFullYear();
 
@@ -74,7 +75,7 @@ MENU.forEach(item => {
   frame.className = 'menu-photo';
   const image = document.createElement('img');
   Object.assign(image, { src: item.image, alt: `${item.name} — namunaviy illyustratsiya`, loading: 'lazy', width: 800, height: 600 });
-  // Remote demo images can fail offline: keep a quiet, clearly labelled placeholder.
+  // Keep a labelled fallback if a menu illustration or replacement photo fails.
   image.addEventListener('error', () => { image.hidden = true; frame.classList.add('image-unavailable'); });
   const tag = document.createElement('span'); tag.className = 'menu-tag'; tag.textContent = item.label;
   frame.append(image, tag);

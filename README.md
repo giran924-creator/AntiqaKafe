@@ -1,8 +1,10 @@
-# CAFÉ NAME — static café website
+# ANTIQA — static café website
 
 A responsive Uzbek-language café website. Plain HTML, CSS and vanilla JavaScript;
-no framework, build tools, dependencies or server-side API. All business details,
-menu prices and illustrations are explicitly **demonstration content**.
+no framework, build tools, dependencies or server-side API. ANTIQA specializes
+in fish dishes and has served guests since 2001. Contacts and coordinates are
+confirmed; menu names/prices and illustrations remain **demonstration content**.
+Opening hours are not yet supplied; no street address is claimed.
 
 ## Structure
 
@@ -35,28 +37,34 @@ The clearly marked configuration at the top of `js/app.js` is the main edit poin
 | Café name | `CAFE.name` |
 | Telephone label | `CAFE.phoneDisplay` |
 | Telephone action | `CAFE.phone`, e.g. `tel:+998901234567` |
-| Address | `CAFE.address` |
+| Location label / coordinates | `CAFE.address`, `CAFE.latitude`, `CAFE.longitude` |
 | Opening hours | `CAFE.hours` |
 | Telegram | `CAFE.telegram`, a complete `https://t.me/...` URL |
 | Instagram | `CAFE.instagram`, a complete HTTPS profile URL |
-| Map | `CAFE.map`, a real Google Maps share URL |
+| Maps | `CAFE.googleMaps`, `CAFE.yandexMaps` |
 | Website / canonical | `CAFE.website`, the final HTTPS site URL |
-| Description | `CAFE.description` |
+| Description / SEO | `CAFE.description`, `CAFE.seoDescription`, `CAFE.ogDescription` |
+| Brand labels / history | `CAFE.shortDescription`, `CAFE.brandSubtitle`, `CAFE.footerSubtitle`, `CAFE.since` |
 | Menu, categories, prices, photos | `MENU` array |
 
-Empty contact URLs deliberately scroll to the clearly marked contact placeholders;
-they do not call or link to invented businesses. The map is a stylized placeholder,
-not an actual location or an embed. Set `CAFE.map` to enable its external link.
-The contact notice disappears when all three contact actions have real URLs.
+The phone, Telegram, Instagram, Google Maps and Yandex Maps links are real and
+are also written into HTML so they work without JavaScript. HTTPS links open in
+a new tab with `noopener noreferrer`. The map remains a stylized illustration,
+not an embedded map, with real external map links and coordinates
+(41.554582, 61.000446). Keep coordinates and the location label in sync.
 
 Long-form section text and navigation labels live directly in `index.html`, grouped
 by named semantic sections. Colors/fonts are in `:root` in `css/style.css`.
 For SEO and visitors without JavaScript, also update initial name/contact text,
 `<title>`, meta description, canonical, Open Graph tags and JSON-LD in `index.html`.
 JavaScript synchronizes live metadata with `CAFE`, but social crawlers often read
-only the original HTML. Replace `https://example.com` everywhere, add your actual
-`images/og-cover.jpg`, and supply truthful structured data before publishing.
-No awards, history, working hours or exact location are claimed.
+only the original HTML. Current canonical/OG URL:
+`https://antiqakafe.giran924.workers.dev/`. Update it in HTML and CAFE when a
+custom domain is connected. The OG image currently uses the local SVG illustration;
+replace it with a real JPG/PNG social image later for wider social-platform support.
+The Restaurant schema includes the confirmed phone, history, cuisine, coordinates,
+social profiles and both map links. Do not add a PostalAddress or opening hours
+until confirmed.
 
 ## Photographs
 
@@ -73,8 +81,9 @@ with Georgia and Arial fallbacks. No analytics, booking or form submission is in
    command empty, and set output directory to `.` (repository root).
 4. Deploy. Configure your custom domain if needed and update the SEO URLs to it.
 
-There is no build step and no secret configuration. Do not publish before replacing
-business and SEO placeholders. Deployment is not performed by this project.
+There is no build step and no secret configuration. Menu examples and illustration
+labels should remain until real dishes, prices and photography are supplied.
+Deployment is not performed by this project.
 
 ## Checks
 
